@@ -1,4 +1,6 @@
 /.git/
 /.history/
+/build/
 /node_modules/
 /scripts/
+/tsconfig.tsbuildinfo
