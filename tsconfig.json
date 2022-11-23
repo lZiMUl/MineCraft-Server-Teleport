@@ -1,0 +1,53 @@
+{
+    "compilerOptions": {
+        "incremental": true,
+        "composite": true,
+        "tsBuildInfoFile": "tsconfig.tsbuildinfo",
+        "diagnostics": true,
+        "target": "ESNext",
+        "lib": [
+            "ESNext"
+        ],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "module": "ESNext",
+        "rootDir": "src",
+        "moduleResolution": "NodeNext",
+        "baseUrl": "./",
+        "declaration": true,
+        "declarationDir": "lib",
+        "declarationMap": true,
+        "outDir": "scripts",
+        "removeComments": true,
+        "importHelpers": true,
+        "downlevelIteration": true,
+        "noEmitHelpers": true,
+        "noEmitOnError": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "allowUnusedLabels": false,
+        "allowUnreachableCode": false,
+        "skipLibCheck": true,
+        "listEmittedFiles": true,
+        "listFiles": true
+    },
+    "exclude": [
+        "test",
+        "build",
+        "lib",
+        "node_modules"
+    ]
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"tpamenu.d.ts","sourceRoot":"","sources":["../../src/views/tpamenu.ts"],"names":[],"mappings":"AAAA,OAAO,EAAY,MAAM,EAAqB,MAAM,mBAAmB,CAAC;AAGxE,cAAM,OAAO,CAAC,CAAC,SAAS,MAAM;IACnB,OAAO,EAAE,CAAC,EAAE,CAAM;gBACN,MAAM,EAAE,CAAC;IA8B5B,OAAO,CAAC,MAAM;CAKjB;AAED,eAAe,OAAO,CAAC"}

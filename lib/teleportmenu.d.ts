@@ -1,0 +1,25 @@
+import { Dimension, Player } from '@minecraft/server';
+interface PlayerData {
+    playerID: string;
+    data: LocationData[];
+}
+interface LocationData {
+    displayName?: string;
+    dimension?: Dimension;
+    x: number;
+    y: number;
+    z: number;
+    rx: number;
+    ry: number;
+}
+declare class TeleportMenu {
+    private static locationData;
+    openMenu(player: Player): void;
+    private addLocation;
+    private getPlayerLocation;
+    private dangerousOperations;
+    private deleteLocation;
+}
+export default TeleportMenu;
+export type { PlayerData, LocationData };
+//# sourceMappingURL=teleportmenu.d.ts.map

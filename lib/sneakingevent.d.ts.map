@@ -1,0 +1,1 @@
+{"version":3,"file":"sneakingevent.d.ts","sourceRoot":"","sources":["../src/sneakingevent.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,EAAwB,MAAM,mBAAmB,CAAC;AAExE,cAAM,aAAa;IACf,OAAO,CAAC,MAAM,CAAC,OAAO,CAAe;gBAElB,KAAK,EAAE,KAAK;IAUxB,SAAS,CAAC,YAAY,EAAE,MAAM,GAAG,IAAI;IAMrC,YAAY,CAAC,UAAU,EAAE,MAAM,GAAG,IAAI;CAOhD;AAGD,eAAe,aAAa,CAAC"}

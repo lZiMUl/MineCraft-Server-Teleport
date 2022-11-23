@@ -1,0 +1,60 @@
+{
+    "name": "minecraft-server-teleport",
+    "description": "Minecraft Server Teleport Tools (By lZiMUl)",
+    "version": "1.0.0",
+    "author": {
+        "name": "lZiMUl",
+        "email": "AA2908554069@gmail.com",
+        "url": "https://b23.tv/vUMYbj"
+    },
+    "contributors": [
+        {
+            "name": "lZiMUl",
+            "email": "AA2908554069@gmail.com",
+            "url": "https://b23.tv/vUMYbj"
+        }
+    ],
+    "maintainers": [
+        {
+            "name": "lZiMUl",
+            "email": "AA2908554069@gmail.com",
+            "url": "https://b23.tv/vUMYbj"
+        }
+    ],
+    "homepage": "https://b23.tv/vUMYbj",
+    "main": "./scripts/index.js",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "./node_modules/.bin/tsc",
+        "dev": "./node_modules/.bin/tsc -w",
+        "prettier": "./node_modules/.bin/prettier"
+    },
+    "keywords": [
+        "lZiMUl",
+        "Minecraft",
+        "Teleport",
+        "Service",
+        "Server",
+        "Interaction"
+    ],
+    "dependencies": {
+        "@minecraft/server": "^1.0.0-beta.11940b24",
+        "@minecraft/server-ui": "^1.0.0-beta.11940b24"
+    },
+    "devDependencies": {
+        "prettier": "^2.7.1",
+        "tslib": "^2.4.1",
+        "typescript": "^4.8.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lZiMUl/MineCraft-Server-Teleport.git"
+    },
+    "bugs": {
+        "url": "https://github.com/lZiMUl/MineCraft-Server-Teleport/issues/",
+        "email": "AA2908554069@gmail.com"
+    },
+    "private": false,
+    "preferGlobal": true,
+    "deprecated": false
+}
