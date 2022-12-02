@@ -1,1 +1,0 @@
-{"version":3,"file":"register.d.ts","sourceRoot":"","sources":["../../src/windows/register.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,mBAAmB,CAAC;AAI3C,OAAO,MAAM,MAAM,kBAAkB,CAAC;AACtC,cAAM,QAAQ;gBACS,MAAM,EAAE,MAAM,EAAE,MAAM,EAAE,MAAM;CAiDpD;AAED,eAAe,QAAQ,CAAC"}

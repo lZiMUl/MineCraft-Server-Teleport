@@ -1,1 +1,0 @@
-{"version":3,"file":"login.d.ts","sourceRoot":"","sources":["../../src/windows/login.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,mBAAmB,CAAC;AAE3C,OAAO,MAAM,MAAM,kBAAkB,CAAC;AAEtC,cAAM,KAAK;gBACY,MAAM,EAAE,MAAM,EAAE,MAAM,EAAE,MAAM;CA0BpD;AAED,eAAe,KAAK,CAAC"}

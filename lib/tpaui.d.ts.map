@@ -1,1 +1,0 @@
-{"version":3,"file":"tpaui.d.ts","sourceRoot":"","sources":["../src/tpaui.ts"],"names":[],"mappings":"AAAA,OAAO,EAAY,MAAM,EAAS,MAAM,mBAAmB,CAAC;AAG5D,cAAM,KAAK;IACA,OAAO,EAAE,MAAM,EAAE,CAAM;gBACX,MAAM,EAAE,MAAM;IAgCjC,OAAO,CAAC,MAAM;CAKjB;AAED,eAAe,KAAK,CAAC"}
