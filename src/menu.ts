@@ -9,7 +9,7 @@ class Menu<T extends Player> {
     public constructor(player: T) {
         new ActionFormData()
             .title('操作面板')
-            .body('请选择操作 (v1.0.0 by lZiMUl)')
+            .body('请选择操作 (v1.0.1 by lZiMUl)')
             .button('玩家传送器')
             .button('记点传送器')
             .button('坐标传送器')
