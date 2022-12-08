@@ -82,11 +82,6 @@ class TeleportMenu<T extends Player> {
                                         rx,
                                         ry
                                     );
-                                    player.playSound('random.explode', {
-                                        location: player.location,
-                                        pitch: 1,
-                                        volume: 0.5,
-                                    });
                                     player.onScreenDisplay.setTitle(
                                         '§a传送成功'
                                     );
@@ -108,7 +103,7 @@ class TeleportMenu<T extends Player> {
     private addLocation(player: T): void {
         new ModalFormData()
             .title('添加新位置')
-            .textField('新位置显示名:', '')
+            .textField('新位置显示名:', '',)
             .show(player)
             .then(async ({ formValues, canceled }): Promise<void> => {
                 if (canceled) {

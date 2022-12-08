@@ -45,9 +45,11 @@
         "listFiles": true
     },
     "exclude": [
-        "test",
-        "build",
+        ".git",
+        ".history",
+        ".vscode",
         "lib",
-        "node_modules"
+        "node_modules",
+        "scripts"
     ]
 }

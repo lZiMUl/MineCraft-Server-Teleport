@@ -4,6 +4,7 @@ declare class LocationTeleportMenu<T extends Player> {
     constructor(player: T);
     private parseDimension;
     private getPlayerDimension;
+    private check;
 }
 export default LocationTeleportMenu;
 //# sourceMappingURL=locationteleportmenu.d.ts.map

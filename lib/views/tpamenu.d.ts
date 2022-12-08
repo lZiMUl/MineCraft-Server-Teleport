@@ -1,6 +1,6 @@
 import { Player } from '@minecraft/server';
 declare class TpaMenu<T extends Player> {
-    players: T[];
+    private players;
     constructor(player: T);
     private tipsUI;
 }

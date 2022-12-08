@@ -34,7 +34,7 @@ class LocationTeleportMenu<T extends Player> {
                             Number(formValues[3])
                         );
                         const { x: rx, y: ry }: XYRotation = player.rotation;
-                        if (!(isNaN(x) && isNaN(y) && isNaN(z))) {
+                        if (!this.check([x, y, z])) {
                             player.teleport(
                                 {
                                     x,
@@ -46,7 +46,7 @@ class LocationTeleportMenu<T extends Player> {
                                 ry
                             );
                         }
-                    } catch (err) {}
+                    } catch (error) {}
                 }
             });
     }
@@ -86,6 +86,14 @@ class LocationTeleportMenu<T extends Player> {
             default:
                 return 0;
         }
+    }
+
+    private check(target: number[]): boolean {
+        return (
+            Array.from(
+                new Set(target.map((item: number): boolean => isNaN(item)))
+            ).shift() ?? false
+        );
     }
 }
 

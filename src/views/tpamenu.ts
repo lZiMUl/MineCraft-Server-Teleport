@@ -1,8 +1,19 @@
-import { Location, Player, world, XYRotation } from '@minecraft/server';
+import {
+    Dimension,
+    Location,
+    Player,
+    world,
+    XYRotation,
+} from '@minecraft/server';
 import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui';
 
+interface TargetPlayer {
+    location: Location;
+    dimension: Dimension;
+}
+
 class TpaMenu<T extends Player> {
-    public players: T[] = [];
+    private players: T[] = [];
     public constructor(player: T) {
         for (let player of world.getPlayers()) {
             this.players.push(player as T);
@@ -13,24 +24,17 @@ class TpaMenu<T extends Player> {
         this.players.forEach(({ name }: T): void => {
             ui.button(name);
         });
-        ui.show(player).then(({ selection }: ActionFormResponse): void => {
-            if (selection !== undefined) {
-                const targetPlayer: T = this.players[selection];
-                const { x, y, z }: Location = targetPlayer.location;
-                const { x: rx, y: ry }: XYRotation = targetPlayer.rotation;
-                player.teleport(
-                    {
-                        x,
-                        y,
-                        z,
-                    },
-                    targetPlayer.dimension,
-                    rx,
-                    ry
-                );
-                this.tipsUI(targetPlayer, player);
+        ui.show(player).then(
+            ({ selection, canceled }: ActionFormResponse): void => {
+                if (!canceled) {
+                    const targetPlayer: T = this.players[selection as number];
+                    const { location, dimension }: TargetPlayer = targetPlayer;
+                    const { x: rx, y: ry }: XYRotation = targetPlayer.rotation;
+                    player.teleport(location, dimension, rx, ry);
+                    this.tipsUI(targetPlayer, player);
+                }
             }
-        });
+        );
     }
 
     private tipsUI(targetPlayer: T, source: T): void {
