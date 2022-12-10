@@ -4,6 +4,7 @@ import {
     ActionFormData,
     ActionFormResponse,
     ModalFormData,
+    ModalFormResponse,
 } from '@minecraft/server-ui';
 // 定义玩家数据格式接口
 interface PlayerData {
@@ -119,102 +120,107 @@ class TeleportMenu<T extends Player> {
             .title('添加新位置')
             .textField('新位置显示名:', '')
             .show(player)
-            .then(async ({ canceled, formValues }): Promise<void> => {
-                // 判断玩家是否取消操作
-                if (canceled) {
-                    // 如果取消了, 重新打开记点传送菜单
-                    new TeleportMenu<T>(player);
-                } else if (formValues) {
-                    // 如果没有取消, 获取玩家输入的新位置名称
-                    const displayName: string = formValues[0];
-                    // 判断新位置名称是否为空字符串并且正则表达式匹配是否包含空格
-                    if (
-                        displayName !== '' &&
-                        !this.displayNameRegExp.test(displayName)
-                    ) {
-                        // 获取玩家当前位置数据
-                        const [{ x, y, z, rx, ry }, dimension]: [
-                            LocationData,
-                            Dimension
-                        ] = [
-                            Object.assign(player.location, {
-                                rx: player.rotation.x,
-                                ry: player.rotation.y,
-                            }),
-                            player.dimension,
-                        ];
-                        // 匹配新位置名称和旧位置名称是否一样，如果一样是否替换旧位置
-                        this.getPlayerLocation(
-                            player,
-                            async (rawItem: PlayerData): Promise<void> => {
-                                // 获取所有位置
-                                for (let item of rawItem.data) {
-                                    // 判断新名称是否在位置数据数组中存在
-                                    if (item.displayName === displayName) {
-                                        // 判断玩家是否选择替换操作
-                                        if (
-                                            await this.dangerousOperations(
-                                                player,
-                                                '该名称已存在是否替换为新位置'
-                                            )
-                                        ) {
-                                            // 替换旧数据操作
-                                            item.dimension = dimension;
-                                            item.x = x;
-                                            item.y = y;
-                                            item.z = z;
-                                            item.rx = rx;
-                                            item.ry = ry;
+            .then(
+                async ({
+                    canceled,
+                    formValues,
+                }: ModalFormResponse): Promise<void> => {
+                    // 判断玩家是否取消操作
+                    if (canceled) {
+                        // 如果取消了, 重新打开记点传送菜单
+                        new TeleportMenu<T>(player);
+                    } else if (formValues) {
+                        // 如果没有取消, 获取玩家输入的新位置名称
+                        const displayName: string = formValues[0];
+                        // 判断新位置名称是否为空字符串并且正则表达式匹配是否包含空格
+                        if (
+                            displayName !== '' &&
+                            !this.displayNameRegExp.test(displayName)
+                        ) {
+                            // 获取玩家当前位置数据
+                            const [{ x, y, z, rx, ry }, dimension]: [
+                                LocationData,
+                                Dimension
+                            ] = [
+                                Object.assign(player.location, {
+                                    rx: player.rotation.x,
+                                    ry: player.rotation.y,
+                                }),
+                                player.dimension,
+                            ];
+                            // 匹配新位置名称和旧位置名称是否一样，如果一样是否替换旧位置
+                            this.getPlayerLocation(
+                                player,
+                                async (rawItem: PlayerData): Promise<void> => {
+                                    // 获取所有位置
+                                    for (let item of rawItem.data) {
+                                        // 判断新名称是否在位置数据数组中存在
+                                        if (item.displayName === displayName) {
+                                            // 判断玩家是否选择替换操作
+                                            if (
+                                                await this.dangerousOperations(
+                                                    player,
+                                                    '该名称已存在是否替换为新位置'
+                                                )
+                                            ) {
+                                                // 替换旧数据操作
+                                                item.dimension = dimension;
+                                                item.x = x;
+                                                item.y = y;
+                                                item.z = z;
+                                                item.rx = rx;
+                                                item.ry = ry;
+                                            }
+                                            break;
                                         }
-                                        break;
                                     }
+                                    // 将新位置推进位置数据数组中
+                                    rawItem.data.push({
+                                        displayName,
+                                        dimension,
+                                        x,
+                                        y,
+                                        z,
+                                        rx,
+                                        ry,
+                                    });
+                                },
+                                (player: T): void => {
+                                    // 如果没有任何位玩家数据直接初始化一个玩家数据
+                                    TeleportMenu.locationData.push({
+                                        playerID: player.id,
+                                        data: [
+                                            {
+                                                displayName,
+                                                dimension,
+                                                x,
+                                                y,
+                                                z,
+                                                rx,
+                                                ry,
+                                            },
+                                        ],
+                                    });
                                 }
-                                // 将新位置推进位置数据数组中
-                                rawItem.data.push({
-                                    displayName,
-                                    dimension,
-                                    x,
-                                    y,
-                                    z,
-                                    rx,
-                                    ry,
-                                });
-                            },
-                            (player: T): void => {
-                                // 如果没有任何位玩家数据直接初始化一个玩家数据
-                                TeleportMenu.locationData.push({
-                                    playerID: player.id,
-                                    data: [
-                                        {
-                                            displayName,
-                                            dimension,
-                                            x,
-                                            y,
-                                            z,
-                                            rx,
-                                            ry,
-                                        },
-                                    ],
-                                });
-                            }
-                        );
-                    } else {
-                        // 如果包含空格显示错误并创建并显示主标题
-                        player.onScreenDisplay.setTitle('§c错误');
-                        // 创建并显示副标题
-                        player.onScreenDisplay.updateSubtitle(
-                            '§c显示名称不合法!\n§c不能为空或者不能有空格'
-                        );
+                            );
+                        } else {
+                            // 如果包含空格显示错误并创建并显示主标题
+                            player.onScreenDisplay.setTitle('§c错误');
+                            // 创建并显示副标题
+                            player.onScreenDisplay.updateSubtitle(
+                                '§c显示名称不合法!\n§c不能为空或者不能有空格'
+                            );
+                        }
                     }
                 }
-            });
+            );
     }
     // 创建获取指定玩家的位置数据数组方法
     private getPlayerLocation(
         player: T,
         callback: (item: PlayerData, index: number) => void,
         init?: (player: T) => void
-    ) {
+    ): void {
         // 循环玩家数据数组
         for (let [index, item] of TeleportMenu.locationData.entries()) {
             // 判断当前玩家名字是否与目标玩家名字一致
