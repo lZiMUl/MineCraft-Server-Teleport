@@ -136,12 +136,14 @@ class TeleportMenu<T extends Player> {
                         new TeleportMenu<T>(player);
                     } else if (formValues) {
                         // 如果没有取消, 获取玩家输入的新位置名称
-                        const displayName: string = formValues[0];
+                        let displayName: string = formValues[0];
                         // 判断新位置名称是否为空字符串并且正则表达式匹配是否包含空格
                         if (
                             displayName !== '' &&
                             this.displayNameRegExp.test(displayName)
                         ) {
+                            // 修改位置显示名称内容格式 显示不影响
+                            displayName = displayName.replaceAll(' ', '|');
                             // 获取玩家当前位置数据
                             const [{ x, y, z, rx, ry }, dimension]: [
                                 LocationData,
@@ -162,10 +164,7 @@ class TeleportMenu<T extends Player> {
                                     // 获取所有位置
                                     for (let item of rawItem.data) {
                                         // 判断新名称是否在位置数据数组中存在
-                                        if (
-                                            item.displayName ===
-                                            displayName.replaceAll(' ', '|')
-                                        ) {
+                                        if (item.displayName === displayName) {
                                             // 判断玩家是否选择替换操作
                                             if (
                                                 await this.dangerousOperations(
