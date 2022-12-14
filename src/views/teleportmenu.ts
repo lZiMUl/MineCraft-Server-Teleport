@@ -26,7 +26,9 @@ class TeleportMenu<T extends Player> {
     // 存储所有玩家位置数据数组
     private static locationData: PlayerData[] = [];
     // 创建正则表达式匹配是否有空格
-    private displayNameRegExp: RegExp = new RegExp(/(^\s+)|(\s+$)|\s+/g);
+    private displayNameRegExp: RegExp = new RegExp(
+        /^(([A-Za-z0-9\_\u4e00-\u9fa5-]+(\s?))*[A-Za-z0-9\_\u4e00-\u9fa5-]+)$/
+    );
     public constructor(player: T) {
         // 创建选择器界面
         const ui: ActionFormData = new ActionFormData()
@@ -44,7 +46,9 @@ class TeleportMenu<T extends Player> {
                 // 判断位置显示名称是否为未定义
                 if (item.displayName) {
                     // 将位置名称创建在选择器上面
-                    ui.button(item.displayName as string);
+                    ui.button(
+                        (item.displayName as string).replaceAll('|', ' ')
+                    );
                 }
             });
         });
@@ -73,6 +77,7 @@ class TeleportMenu<T extends Player> {
                                 (_item: PlayerData, index: number): void => {
                                     // 获取位置的数据
                                     const {
+                                        displayName,
                                         dimension,
                                         x,
                                         y,
@@ -96,7 +101,7 @@ class TeleportMenu<T extends Player> {
                                     );
                                     // 创建并显示主标题
                                     player.onScreenDisplay.setTitle(
-                                        '§a传送成功'
+                                        `§a${displayName}`
                                     );
                                     // 创建并显示副标题
                                     player.onScreenDisplay.updateSubtitle(
@@ -135,7 +140,7 @@ class TeleportMenu<T extends Player> {
                         // 判断新位置名称是否为空字符串并且正则表达式匹配是否包含空格
                         if (
                             displayName !== '' &&
-                            !this.displayNameRegExp.test(displayName)
+                            this.displayNameRegExp.test(displayName)
                         ) {
                             // 获取玩家当前位置数据
                             const [{ x, y, z, rx, ry }, dimension]: [
@@ -157,7 +162,10 @@ class TeleportMenu<T extends Player> {
                                     // 获取所有位置
                                     for (let item of rawItem.data) {
                                         // 判断新名称是否在位置数据数组中存在
-                                        if (item.displayName === displayName) {
+                                        if (
+                                            item.displayName ===
+                                            displayName.replaceAll(' ', '|')
+                                        ) {
                                             // 判断玩家是否选择替换操作
                                             if (
                                                 await this.dangerousOperations(
@@ -212,7 +220,7 @@ class TeleportMenu<T extends Player> {
                             player.onScreenDisplay.setTitle('§c错误');
                             // 创建并显示副标题
                             player.onScreenDisplay.updateSubtitle(
-                                '§c显示名称不合法!\n§c不能为空或者不能有空格'
+                                '§c显示名称不合法!\n§c不能为空或者开头不能有空格'
                             );
                         }
                     }
@@ -265,7 +273,7 @@ class TeleportMenu<T extends Player> {
         // 遍历目标玩家位置数据数组
         source.data.forEach((item: LocationData) => {
             // 将位置名称创建在选择器上面
-            ui.button(item.displayName as string);
+            ui.button((item.displayName as string).replaceAll('|', ' '));
         });
         ui.show(player).then(
             async ({
