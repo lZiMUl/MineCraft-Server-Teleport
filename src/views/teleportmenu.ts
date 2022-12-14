@@ -101,7 +101,7 @@ class TeleportMenu<T extends Player> {
                                     );
                                     // 创建并显示主标题
                                     player.onScreenDisplay.setTitle(
-                                        `§a${displayName}`
+                                        `§a${displayName?.replaceAll('|', ' ')}`
                                     );
                                     // 创建并显示副标题
                                     player.onScreenDisplay.updateSubtitle(
