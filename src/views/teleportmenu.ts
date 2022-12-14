@@ -151,7 +151,9 @@ class TeleportMenu<T extends Player> {
                             // 匹配新位置名称和旧位置名称是否一样，如果一样是否替换旧位置
                             this.getPlayerLocation(
                                 player,
-                                async (rawItem: PlayerData): Promise<void> => {
+                                async (
+                                    rawItem: PlayerData
+                                ): Promise<boolean> => {
                                     // 获取所有位置
                                     for (let item of rawItem.data) {
                                         // 判断新名称是否在位置数据数组中存在
@@ -170,8 +172,9 @@ class TeleportMenu<T extends Player> {
                                                 item.z = z;
                                                 item.rx = rx;
                                                 item.ry = ry;
+                                                return true;
                                             }
-                                            break;
+                                            return false;
                                         }
                                     }
                                     // 将新位置推进位置数据数组中
@@ -184,6 +187,7 @@ class TeleportMenu<T extends Player> {
                                         rx,
                                         ry,
                                     });
+                                    return true;
                                 },
                                 (player: T): void => {
                                     // 如果没有任何位玩家数据直接初始化一个玩家数据
