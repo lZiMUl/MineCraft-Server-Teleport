@@ -1,8 +1,8 @@
 // 导入基础模块
 import {
     Dimension,
-    Location,
     Player,
+    Vector3,
     world,
     XYRotation,
 } from '@minecraft/server';
@@ -13,7 +13,7 @@ class LocationTeleportMenu<T extends Player> {
     private static DimensionList: string[] = ['主世界', '地狱', '末地'];
     public constructor(player: T) {
         // 获取玩家位置
-        const { x, y, z }: Location = player.location;
+        const { x, y, z }: Vector3 = player.location;
         // 创建选择器界面
         new ModalFormData()
             .title('坐标传送器')

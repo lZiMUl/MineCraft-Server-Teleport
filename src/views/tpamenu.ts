@@ -1,17 +1,6 @@
 // 导入基础模块
-import {
-    Dimension,
-    Location,
-    Player,
-    world,
-    XYRotation,
-} from '@minecraft/server';
+import { Player, world, XYRotation } from '@minecraft/server';
 import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui';
-// 定义目标玩家数据格式接口
-interface TargetPlayer {
-    location: Location;
-    dimension: Dimension;
-}
 // 定义玩家传送器菜单类
 class TpaMenu<T extends Player> {
     // 存储所有玩家名字和位置的数据数组
@@ -38,7 +27,7 @@ class TpaMenu<T extends Player> {
                     // 获取玩家选择的目标玩家
                     const targetPlayer: T = this.players[selection as number];
                     // 获取目标玩家的位置和维度
-                    const { location, dimension }: TargetPlayer = targetPlayer;
+                    const { location, dimension }: Player = targetPlayer;
                     // 获取目标玩家的视角坐标系
                     const { x: rx, y: ry }: XYRotation = targetPlayer.rotation;
                     // 将操作玩家传送至目标玩家
