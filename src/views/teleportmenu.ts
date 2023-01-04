@@ -105,7 +105,7 @@ class TeleportMenu<T extends Player> {
                                     );
                                     // 创建并显示副标题
                                     player.onScreenDisplay.updateSubtitle(
-                                        `§a维度为: §e[§b${this.getDimensionName(
+                                        `§a维度为: §e[§9${this.getDimensionName(
                                             dimension as Dimension
                                         )}§e] §d| §a坐标为: §e[§c${Math.floor(
                                             x
