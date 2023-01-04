@@ -36,15 +36,21 @@ class CommandRegister {
         if (message.split('')[0] === this.identifier) {
             // 遍历所有当前所有缓存栈
             this.cache.forEach((item: Cache): void => {
+                const commandNameEndPos: number = message.indexOf(' ');
                 // 判断命令名称是否一致
                 if (
                     item.commandName ===
-                    message.substring(1, message.indexOf(' ') ?? message.length)
+                    message.substring(
+                        1,
+                        commandNameEndPos !== -1
+                            ? commandNameEndPos
+                            : message.length
+                    )
                 ) {
                     // 一致就回调
                     item.callback({
                         args: message
-                            .substring(message.indexOf(' ') + 1, message.length)
+                            .substring(commandNameEndPos + 1, message.length)
                             .split(' '),
                         sender,
                     });

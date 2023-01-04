@@ -4,7 +4,7 @@
         "name": "MineCraft Server Teleport",
         "description": "Minecraft Server Teleport Tools (By lZiMUl)",
         "uuid": "cd9d9466-926d-4d95-8e85-d2f914bf95bc",
-        "version": [1, 2, 5],
+        "version": [1, 2, 6],
         "min_engine_version": [1, 19, 51]
     },
     "modules": [
@@ -13,7 +13,7 @@
             "language": "javascript",
             "description": "Minecraft Server Teleport Tools (By lZiMUl)",
             "uuid": "df4b139a-cd89-43c1-a2d8-500f2a13edb8",
-            "version": [1, 2, 5],
+            "version": [1, 2, 6],
             "entry": "scripts/index.js"
         }
     ],
