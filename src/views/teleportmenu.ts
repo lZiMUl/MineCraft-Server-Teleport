@@ -105,7 +105,10 @@ class TeleportMenu<T extends Player> {
                                     );
                                     // 创建并显示副标题
                                     player.onScreenDisplay.updateSubtitle(
-                                        `§a坐标为: §e[§c${Math.floor(
+                                        `§维度为: §e[§c${this.getDimensionName(
+                                            dimension as Dimension
+                                        )}§e]\n
+                                        §a坐标为: §e[§c${Math.floor(
                                             x
                                         )}§e, §a${Math.floor(
                                             y
@@ -225,6 +228,24 @@ class TeleportMenu<T extends Player> {
                     }
                 }
             );
+    }
+    // 创建获取玩家维度方法
+    private getDimensionName({ id }: Dimension): string {
+        // 获取指定玩家的维度标识符
+        switch (id) {
+            // 主世界
+            case 'minecraft:overworld':
+                return '主世界';
+            // 地狱
+            case 'minecraft:nether':
+                return '地狱';
+            // 末地
+            case 'minecraft:the_end':
+                return '末地';
+            // 主世界
+            default:
+                return '主世界';
+        }
     }
     // 创建获取指定玩家的位置数据数组方法
     private getPlayerLocation(

@@ -17,6 +17,7 @@ declare class TeleportMenu<T extends Player> {
     private displayNameRegExp;
     constructor(player: T);
     private addLocation;
+    private getDimensionName;
     private getPlayerLocation;
     private dangerousOperations;
     private deleteLocation;
