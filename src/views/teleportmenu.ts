@@ -107,8 +107,7 @@ class TeleportMenu<T extends Player> {
                                     player.onScreenDisplay.updateSubtitle(
                                         `§a维度为: §e[§b${this.getDimensionName(
                                             dimension as Dimension
-                                        )}§e]
-                                        §a坐标为: §e[§c${Math.floor(
+                                        )}§e] §d| §a坐标为: §e[§c${Math.floor(
                                             x
                                         )}§e, §a${Math.floor(
                                             y
