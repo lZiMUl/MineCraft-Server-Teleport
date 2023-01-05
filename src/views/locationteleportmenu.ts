@@ -30,20 +30,21 @@ class LocationTeleportMenu<T extends Player> {
                 // 判断玩家是否取消操作并且值是否为空或者未定义
                 if (!canceled && formValues) {
                     try {
-                        // 获取玩家输入的三维坐标值
-                        const [x, y, z]: number[] = [
-                            Number(formValues[0]),
-                            Number(formValues[1]),
-                            Number(formValues[2]),
-                        ];
-                        // 获取玩家选择的维度
-                        const dimension: Dimension = this.parseDimension(
-                            Number(formValues[3])
-                        );
-                        // 获取玩家的视角坐标
-                        const { x: rx, y: ry }: XYRotation = player.rotation;
                         // 判断三维坐标是否为数字
-                        if (!this.check([x, y, z])) {
+                        if (!this.check(formValues)) {
+                            // 获取玩家输入的三维坐标值
+                            const [x, y, z]: number[] = [
+                                Number(formValues[0]),
+                                Number(formValues[1]),
+                                Number(formValues[2]),
+                            ];
+                            // 获取玩家选择的维度
+                            const dimension: Dimension = this.parseDimension(
+                                Number(formValues[3])
+                            );
+                            // 获取玩家的视角坐标
+                            const { x: rx, y: ry }: XYRotation =
+                                player.rotation;
                             // 将玩家传送到该位置
                             player.teleport(
                                 {
@@ -55,6 +56,9 @@ class LocationTeleportMenu<T extends Player> {
                                 rx,
                                 ry
                             );
+                        } else {
+                            // 创建并显示主标题
+                            player.onScreenDisplay.setTitle('§4非法三维坐标值');
                         }
                     } catch (error) {}
                 }
@@ -104,12 +108,13 @@ class LocationTeleportMenu<T extends Player> {
         }
     }
     // 检测数组内容是否全部是数字类型
-    private check(target: number[]): boolean {
-        return (
-            Array.from(
-                new Set(target.map((item: number): boolean => isNaN(item)))
-            ).shift() ?? false
-        );
+    private check(target: unknown[]): boolean {
+        for (let item of target) {
+            if (item === '' || isNaN(Number(item))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 // 导出坐标传送器菜单
