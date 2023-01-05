@@ -31,7 +31,7 @@ class LocationTeleportMenu<T extends Player> {
                 if (!canceled && formValues) {
                     try {
                         // 判断三维坐标是否为数字
-                        if (!this.check(formValues)) {
+                        if (this.check(formValues)) {
                             // 获取玩家输入的三维坐标值
                             const [x, y, z]: number[] = [
                                 Number(formValues[0]),
