@@ -15,7 +15,6 @@ class Menu<T extends Player> {
             .button('玩家传送器')
             .button('记点传送器')
             .button('坐标传送器')
-            .button('亡位传送器')
             .show(player)
             .then(({ canceled, selection }: ActionFormResponse): void => {
                 // 判断玩家是否取消操作
