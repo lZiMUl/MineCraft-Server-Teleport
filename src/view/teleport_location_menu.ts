@@ -8,7 +8,7 @@ import {
 } from '@minecraft/server';
 import { ModalFormData, ModalFormResponse } from '@minecraft/server-ui';
 // 创建坐标传送器菜单类
-class LocationTeleportMenu<T extends Player> {
+class TeleportLocationMenu<T extends Player> {
     // 创建静态维度名称
     private static DimensionList: string[] = ['主世界', '地狱', '末地'];
     public constructor(player: T) {
@@ -22,7 +22,7 @@ class LocationTeleportMenu<T extends Player> {
             .textField('Z轴', '', String(Math.floor(z)))
             .dropdown(
                 '维度',
-                LocationTeleportMenu.DimensionList,
+                TeleportLocationMenu.DimensionList,
                 this.getPlayerDimension(player)
             )
             .show(player)
@@ -118,4 +118,4 @@ class LocationTeleportMenu<T extends Player> {
     }
 }
 // 导出坐标传送器菜单
-export default LocationTeleportMenu;
+export default TeleportLocationMenu;

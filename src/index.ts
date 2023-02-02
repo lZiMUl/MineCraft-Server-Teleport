@@ -7,7 +7,7 @@ import {
     PlayerJoinEvent,
 } from '@minecraft/server';
 import Menu from './menu';
-import CommandRegister from './tool/commandregister';
+import CommandRegister from './tool/command_register';
 // 监听物品使用事件
 world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
     // 判断是否为潜伏状态
@@ -32,7 +32,7 @@ world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
 const commandRegister: CommandRegister = new CommandRegister('#');
 // 获取版本
 commandRegister.addCommandListener('version', (): void => {
-    world.say(`Version: 1.2.7`);
+    world.say(`Version: 1.2.8`);
 });
 // 将聊天数据流发送到自定义命令管道里
 world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>

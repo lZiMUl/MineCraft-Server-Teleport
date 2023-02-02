@@ -2,7 +2,7 @@
 import { Player, world, XYRotation } from '@minecraft/server';
 import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui';
 // 定义玩家传送器菜单类
-class TpaMenu<T extends Player> {
+class TeleportPlayerMenu<T extends Player> {
     // 存储所有玩家名字和位置的数据数组
     private players: T[] = [];
     public constructor(player: T) {
@@ -47,4 +47,4 @@ class TpaMenu<T extends Player> {
     }
 }
 // 导出玩家传送菜单
-export default TpaMenu;
+export default TeleportPlayerMenu;

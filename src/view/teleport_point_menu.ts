@@ -22,7 +22,7 @@ interface LocationData {
     ry: number;
 }
 // 创建记点传送器菜单类
-class TeleportMenu<T extends Player> {
+class TeleportPointMenu<T extends Player> {
     // 存储所有玩家位置数据数组
     private static locationData: PlayerData[] = [];
     // 创建正则表达式匹配是否有空格
@@ -85,7 +85,7 @@ class TeleportMenu<T extends Player> {
                                         rx,
                                         ry,
                                     }: LocationData =
-                                        TeleportMenu.locationData[index].data[
+                                    TeleportPointMenu.locationData[index].data[
                                             (selection as number) - 2
                                         ];
                                     // 将玩家传送到该位置
@@ -135,7 +135,7 @@ class TeleportMenu<T extends Player> {
                     // 判断玩家是否取消操作
                     if (canceled) {
                         // 如果取消了, 重新打开记点传送菜单
-                        new TeleportMenu<T>(player);
+                        new TeleportPointMenu<T>(player);
                     } else if (formValues) {
                         // 如果没有取消, 获取玩家输入的新位置名称
                         let displayName: string = formValues[0];
@@ -200,7 +200,7 @@ class TeleportMenu<T extends Player> {
                                 },
                                 (player: T): void => {
                                     // 如果没有任何位玩家数据直接初始化一个玩家数据
-                                    TeleportMenu.locationData.push({
+                                    TeleportPointMenu.locationData.push({
                                         playerID: player.id,
                                         data: [
                                             {
@@ -253,7 +253,7 @@ class TeleportMenu<T extends Player> {
         init?: (player: T) => void
     ): void {
         // 循环玩家数据数组
-        for (let [index, item] of TeleportMenu.locationData.entries()) {
+        for (let [index, item] of TeleportPointMenu.locationData.entries()) {
             // 判断当前玩家名字是否与目标玩家名字一致
             if (item.playerID === player.id) {
                 // 返回目标玩家数据和索引
@@ -320,12 +320,12 @@ class TeleportMenu<T extends Player> {
                     );
                 }
                 // 否则重新打开记点传送菜单
-                else new TeleportMenu<T>(player);
+                else new TeleportPointMenu<T>(player);
             }
         );
     }
 }
 // 导出记点传送菜单
-export default TeleportMenu;
+export default TeleportPointMenu;
 // 导出记点传送菜单数据格式接口
 export type { PlayerData, LocationData };
