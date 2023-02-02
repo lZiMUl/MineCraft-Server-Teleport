@@ -12,7 +12,7 @@ interface LocationData {
     rx: number;
     ry: number;
 }
-declare class TeleportMenu<T extends Player> {
+declare class TeleportPointMenu<T extends Player> {
     private static locationData;
     private displayNameRegExp;
     constructor(player: T);
@@ -22,6 +22,6 @@ declare class TeleportMenu<T extends Player> {
     private dangerousOperations;
     private deleteLocation;
 }
-export default TeleportMenu;
+export default TeleportPointMenu;
 export type { PlayerData, LocationData };
-//# sourceMappingURL=teleportmenu.d.ts.map
+//# sourceMappingURL=teleport_point_menu.d.ts.map
