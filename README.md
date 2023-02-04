@@ -10,7 +10,7 @@
 ---
 
 * 下载行为包
-    ``wget https://github.com/lZiMUl/MineCraft-Server-Teleport/releases/download/1.2.8/MineCraft.Server.Teleport.mcpack``
+    ``wget https://github.com/lZiMUl/MineCraft-Server-Teleport/releases/download/1.2.9/MineCraft.Server.Teleport.mcpack``
 
 ---
 
