@@ -36,9 +36,3 @@
 ---
 
 * 启动服务器
-
-<style>
-hr {
-  border-image: linear-gradient(to right, #F00, #0F0 20%, #00F 80%, #000) 1 !important;
-}
-</style>

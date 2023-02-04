@@ -8,21 +8,21 @@ import {
 } from '@minecraft/server';
 import { ModalFormData, ModalFormResponse } from '@minecraft/server-ui';
 // 创建坐标传送器菜单类
-class TeleportLocationMenu<T extends Player> {
+class CoordinateTeleporterMenu<T extends Player> {
     // 创建静态维度名称
-    private static DimensionList: string[] = ['主世界', '地狱', '末地'];
+    private static DimensionList: string[] = ['Overworld', 'Hell', 'The end'];
     public constructor(player: T) {
         // 获取玩家位置
         const { x, y, z }: Vector3 = player.location;
         // 创建选择器界面
-        new ModalFormData()
-            .title('坐标传送器')
-            .textField('X轴', '', String(Math.floor(x)))
-            .textField('Y轴', '', String(Math.floor(y)))
-            .textField('Z轴', '', String(Math.floor(z)))
+        new ModalFormData() 
+            .title('Coordinate Teleporter')
+            .textField('X-axis', '', String(Math.floor(x)))
+            .textField('Y-axis', '', String(Math.floor(y)))
+            .textField('Z-axis', '', String(Math.floor(z)))
             .dropdown(
-                '维度',
-                TeleportLocationMenu.DimensionList,
+                'Dimension',
+                CoordinateTeleporterMenu.DimensionList,
                 this.getPlayerDimension(player)
             )
             .show(player)
@@ -58,7 +58,7 @@ class TeleportLocationMenu<T extends Player> {
                             );
                         } else {
                             // 创建并显示主标题
-                            player.onScreenDisplay.setTitle('§4非法三维坐标值');
+                            player.onScreenDisplay.setTitle('§4Illegal 3D coordinate values');
                         }
                     } catch (error) {}
                 }
@@ -118,4 +118,4 @@ class TeleportLocationMenu<T extends Player> {
     }
 }
 // 导出坐标传送器菜单
-export default TeleportLocationMenu;
+export default CoordinateTeleporterMenu;

@@ -21,8 +21,8 @@ interface LocationData {
     rx: number;
     ry: number;
 }
-// 创建记点传送器菜单类
-class TeleportPointMenu<T extends Player> {
+// 创建位置传送器菜单类
+class LocationTeleporterMenu<T extends Player> {
     // 存储所有玩家位置数据数组
     private static locationData: PlayerData[] = [];
     // 创建正则表达式匹配是否有空格
@@ -32,14 +32,14 @@ class TeleportPointMenu<T extends Player> {
     public constructor(player: T) {
         // 创建选择器界面
         const ui: ActionFormData = new ActionFormData()
-            .title('记点传送器')
-            .body('请选择传送地点')
-            .button('添加新位置');
+            .title('Location Teleporter')
+            .body('Please select a delivery location')
+            .button('Add a new location');
         // 获取玩家位置数据数组
         this.getPlayerLocation(player, (item: PlayerData): void => {
             // 如果有位置数据显示删除按钮
             if (item.data.length) {
-                ui.button('删除位置');
+                ui.button('Delete a location');
             }
             // 遍历位置数据数组
             item.data.forEach((item: LocationData): void => {
@@ -70,7 +70,7 @@ class TeleportPointMenu<T extends Player> {
                                     this.deleteLocation(player, item)
                             );
                             break;
-                        // 传送该位置
+                        // 传送到该位置
                         default:
                             this.getPlayerLocation(
                                 player,
@@ -85,9 +85,9 @@ class TeleportPointMenu<T extends Player> {
                                         rx,
                                         ry,
                                     }: LocationData =
-                                    TeleportPointMenu.locationData[index].data[
-                                            (selection as number) - 2
-                                        ];
+                                        LocationTeleporterMenu.locationData[
+                                            index
+                                        ].data[(selection as number) - 2];
                                     // 将玩家传送到该位置
                                     player.teleport(
                                         {
@@ -105,9 +105,9 @@ class TeleportPointMenu<T extends Player> {
                                     );
                                     // 创建并显示副标题
                                     player.onScreenDisplay.updateSubtitle(
-                                        `§a维度为: §e[§9${this.getDimensionName(
+                                        `§aThe dimension is: §e[§9${this.getDimensionName(
                                             dimension as Dimension
-                                        )}§e] §d| §a坐标为: §e[§c${Math.floor(
+                                        )}§e] §d| §aThe coordinates are: §e[§c${Math.floor(
                                             x
                                         )}§e, §a${Math.floor(
                                             y
@@ -124,8 +124,8 @@ class TeleportPointMenu<T extends Player> {
     private addLocation(player: T): void {
         // 创建选择器界面
         new ModalFormData()
-            .title('添加新位置')
-            .textField('新位置显示名:', '')
+            .title('Add a new location')
+            .textField('The new location display name:', '')
             .show(player)
             .then(
                 async ({
@@ -134,8 +134,8 @@ class TeleportPointMenu<T extends Player> {
                 }: ModalFormResponse): Promise<void> => {
                     // 判断玩家是否取消操作
                     if (canceled) {
-                        // 如果取消了, 重新打开记点传送菜单
-                        new TeleportPointMenu<T>(player);
+                        // 如果取消了, 重新打开位置传送器菜单
+                        new LocationTeleporterMenu<T>(player);
                     } else if (formValues) {
                         // 如果没有取消, 获取玩家输入的新位置名称
                         let displayName: string = formValues[0];
@@ -171,7 +171,7 @@ class TeleportPointMenu<T extends Player> {
                                             if (
                                                 await this.dangerousOperations(
                                                     player,
-                                                    '该名称已存在是否替换为新位置'
+                                                    'Whether the name already exists is replaced with the new location'
                                                 )
                                             ) {
                                                 // 替换旧数据操作
@@ -200,7 +200,7 @@ class TeleportPointMenu<T extends Player> {
                                 },
                                 (player: T): void => {
                                     // 如果没有任何位玩家数据直接初始化一个玩家数据
-                                    TeleportPointMenu.locationData.push({
+                                    LocationTeleporterMenu.locationData.push({
                                         playerID: player.id,
                                         data: [
                                             {
@@ -218,10 +218,10 @@ class TeleportPointMenu<T extends Player> {
                             );
                         } else {
                             // 如果包含空格显示错误并创建并显示主标题
-                            player.onScreenDisplay.setTitle('§c错误');
+                            player.onScreenDisplay.setTitle('§cmistake');
                             // 创建并显示副标题
                             player.onScreenDisplay.updateSubtitle(
-                                '§c显示名称不合法!\n§c不能为空或者开头不能有空格'
+                                '§cThe display name is invalid!\n§cCannot be empty or have a space at the beginning'
                             );
                         }
                     }
@@ -234,16 +234,16 @@ class TeleportPointMenu<T extends Player> {
         switch (id) {
             // 主世界
             case 'minecraft:overworld':
-                return '主世界';
+                return 'Overworld';
             // 地狱
             case 'minecraft:nether':
-                return '地狱';
+                return 'Hell';
             // 末地
             case 'minecraft:the_end':
-                return '末地';
+                return 'The end';
             // 主世界
             default:
-                return '主世界';
+                return 'Overworld';
         }
     }
     // 创建获取指定玩家的位置数据数组方法
@@ -253,7 +253,10 @@ class TeleportPointMenu<T extends Player> {
         init?: (player: T) => void
     ): void {
         // 循环玩家数据数组
-        for (let [index, item] of TeleportPointMenu.locationData.entries()) {
+        for (let [
+            index,
+            item,
+        ] of LocationTeleporterMenu.locationData.entries()) {
             // 判断当前玩家名字是否与目标玩家名字一致
             if (item.playerID === player.id) {
                 // 返回目标玩家数据和索引
@@ -271,9 +274,9 @@ class TeleportPointMenu<T extends Player> {
         return new Promise((callback: (status: boolean) => void) => {
             // 创建选择器界面
             new ActionFormData()
-                .title('警告')
+                .title('Warn')
                 .body(message)
-                .button('确认')
+                .button('confirm')
                 .show(player)
                 .then(({ canceled, selection }: ActionFormResponse): void => {
                     // 判断选择操作
@@ -287,8 +290,8 @@ class TeleportPointMenu<T extends Player> {
     private deleteLocation(player: T, source: PlayerData): void {
         // 创建选择器界面
         const ui: ActionFormData = new ActionFormData()
-            .title('位置删除')
-            .body('请选择删除位置');
+            .title('Location deletion')
+            .body('Please select Delete Location');
         // 遍历目标玩家位置数据数组
         source.data.forEach((item: LocationData) => {
             // 将位置名称创建在选择器上面
@@ -302,7 +305,10 @@ class TeleportPointMenu<T extends Player> {
                 // 判断玩家是否取消操作并且使用删除功能选择
                 if (
                     !canceled &&
-                    (await this.dangerousOperations(player, '是否删除该位置'))
+                    (await this.dangerousOperations(
+                        player,
+                        'Whether to delete the location'
+                    ))
                 ) {
                     // 遍历指定玩家的位置数据数组
                     source.data.forEach(
@@ -319,13 +325,13 @@ class TeleportPointMenu<T extends Player> {
                         }
                     );
                 }
-                // 否则重新打开记点传送菜单
-                else new TeleportPointMenu<T>(player);
+                // 否则重新打开位置传送器菜单
+                else new LocationTeleporterMenu<T>(player);
             }
         );
     }
 }
-// 导出记点传送菜单
-export default TeleportPointMenu;
-// 导出记点传送菜单数据格式接口
+// 导出位置传送器菜单
+export default LocationTeleporterMenu;
+// 导出位置传送器菜单数据格式接口
 export type { PlayerData, LocationData };

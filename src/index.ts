@@ -32,7 +32,7 @@ world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
 const commandRegister: CommandRegister = new CommandRegister('#');
 // 获取版本
 commandRegister.addCommandListener('version', (): void => {
-    world.say(`Version: 1.2.8`);
+    world.say(`Version: 1.2.9`);
 });
 // 将聊天数据流发送到自定义命令管道里
 world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>
@@ -40,6 +40,6 @@ world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>
 );
 // 玩家进入世界提示
 world.events.playerJoin.subscribe(({ player }: PlayerJoinEvent): void => {
-    player.onScreenDisplay.updateSubtitle('§a该世界已启用 §cMST §a服务');
-    player.onScreenDisplay.setTitle('§e提示');
+    player.onScreenDisplay.updateSubtitle('§aThe world has §cMST §aservices enabled');
+    player.onScreenDisplay.setTitle('§eTips');
 });

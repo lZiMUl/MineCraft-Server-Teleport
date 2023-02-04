@@ -2,7 +2,7 @@
 import { Player, world, XYRotation } from '@minecraft/server';
 import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui';
 // 定义玩家传送器菜单类
-class TeleportPlayerMenu<T extends Player> {
+class PlayerTeleporterMenu<T extends Player> {
     // 存储所有玩家名字和位置的数据数组
     private players: T[] = [];
     public constructor(player: T) {
@@ -13,8 +13,8 @@ class TeleportPlayerMenu<T extends Player> {
         }
         // 创建选择器界面
         const ui: ActionFormData = new ActionFormData()
-            .title('玩家传送器')
-            .body('请选择传送玩家');
+            .title('Player Teleporter')
+            .body('Please select the player to teleport');
         // 遍历玩家数据数组
         this.players.forEach(({ name }: T): void => {
             // 将玩家名字创建在选择器上面
@@ -42,9 +42,9 @@ class TeleportPlayerMenu<T extends Player> {
     private tipsUI(targetPlayer: T, source: T): void {
         // 创建并显示主标题
         targetPlayer.onScreenDisplay.setActionBar(
-            `§a玩家 §e[§c${source.name}§e] §a已到您身边`
+            `§aPlayer §e[§c${source.name}§e] §ahas teleported to you`
         );
     }
 }
-// 导出玩家传送菜单
-export default TeleportPlayerMenu;
+// 导出玩家传送器菜单
+export default PlayerTeleporterMenu;
