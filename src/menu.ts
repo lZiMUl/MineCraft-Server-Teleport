@@ -11,7 +11,7 @@ class Menu<T extends Player> {
         // 创建选择器界面
         new ActionFormData()
             .title('Actions menu')
-            .body('Please select an action (v1.2.9 by lZiMUl)')
+            .body('Please select an action (v1.3.0 by lZiMUl)')
             .button('Player Teleporter')
             .button('Location Teleporter')
             .button('Coordinate Teleporter')

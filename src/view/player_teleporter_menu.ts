@@ -29,7 +29,8 @@ class PlayerTeleporterMenu<T extends Player> {
                     // 获取目标玩家的位置和维度
                     const { location, dimension }: Player = targetPlayer;
                     // 获取目标玩家的视角坐标系
-                    const { x: rx, y: ry }: XYRotation = targetPlayer.rotation;
+                    const { x: rx, y: ry }: XYRotation =
+                        targetPlayer.getRotation();
                     // 将操作玩家传送至目标玩家
                     player.teleport(location, dimension, rx, ry);
                     // 调用显示提示

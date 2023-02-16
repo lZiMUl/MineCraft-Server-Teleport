@@ -15,7 +15,7 @@ class CoordinateTeleporterMenu<T extends Player> {
         // 获取玩家位置
         const { x, y, z }: Vector3 = player.location;
         // 创建选择器界面
-        new ModalFormData() 
+        new ModalFormData()
             .title('Coordinate Teleporter')
             .textField('X-axis', '', String(Math.floor(x)))
             .textField('Y-axis', '', String(Math.floor(y)))
@@ -44,7 +44,7 @@ class CoordinateTeleporterMenu<T extends Player> {
                             );
                             // 获取玩家的视角坐标
                             const { x: rx, y: ry }: XYRotation =
-                                player.rotation;
+                                player.getHeadLocation();
                             // 将玩家传送到该位置
                             player.teleport(
                                 {
@@ -58,7 +58,9 @@ class CoordinateTeleporterMenu<T extends Player> {
                             );
                         } else {
                             // 创建并显示主标题
-                            player.onScreenDisplay.setTitle('§4Illegal 3D coordinate values');
+                            player.onScreenDisplay.setTitle(
+                                '§4Illegal 3D coordinate values'
+                            );
                         }
                     } catch (error) {}
                 }
