@@ -44,7 +44,7 @@ class CoordinateTeleporterMenu<T extends Player> {
                             );
                             // 获取玩家的视角坐标
                             const { x: rx, y: ry }: XYRotation =
-                                player.getHeadLocation();
+                                player.rotation;
                             // 将玩家传送到该位置
                             player.teleport(
                                 {
@@ -54,7 +54,8 @@ class CoordinateTeleporterMenu<T extends Player> {
                                 },
                                 dimension,
                                 rx,
-                                ry
+                                ry,
+                                false
                             );
                         } else {
                             // 创建并显示主标题

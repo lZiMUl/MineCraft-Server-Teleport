@@ -47,10 +47,7 @@ class LocationTeleporterMenu<T extends Player> {
                 if (item.displayName) {
                     // 将位置名称创建在选择器上面
                     ui.button(
-                        (item.displayName as string).replace(
-                            new RegExp('|', 'g'),
-                            ' '
-                        )
+                        (item.displayName as string).replaceAll('|', ' ')
                     );
                 }
             });
@@ -100,14 +97,12 @@ class LocationTeleporterMenu<T extends Player> {
                                         },
                                         dimension as Dimension,
                                         rx,
-                                        ry
+                                        ry,
+                                        false
                                     );
                                     // 创建并显示主标题
                                     player.onScreenDisplay.setTitle(
-                                        `§6${displayName?.replace(
-                                            new RegExp('|', 'g'),
-                                            ' '
-                                        )}`
+                                        `§6${displayName?.replaceAll('|', ' ')}`
                                     );
                                     // 创建并显示副标题
                                     player.onScreenDisplay.updateSubtitle(
@@ -151,12 +146,9 @@ class LocationTeleporterMenu<T extends Player> {
                             this.displayNameRegExp.test(displayName)
                         ) {
                             // 修改位置显示名称内容格式 显示不影响
-                            displayName = displayName.replace(
-                                new RegExp(' ', 'g'),
-                                '|'
-                            );
+                            displayName = displayName.replaceAll(' ', '|');
                             // 获取目标玩家的视角坐标系
-                            const rotation: XYRotation = player.getRotation();
+                            const rotation: XYRotation = player.rotation;
                             // 获取玩家当前位置数据
                             const [{ x, y, z, rx, ry }, dimension]: [
                                 LocationData,
@@ -306,9 +298,7 @@ class LocationTeleporterMenu<T extends Player> {
         // 遍历目标玩家位置数据数组
         source.data.forEach((item: LocationData) => {
             // 将位置名称创建在选择器上面
-            ui.button(
-                (item.displayName as string).replace(new RegExp('|', 'g'), ' ')
-            );
+            ui.button((item.displayName as string).replaceAll('|', ' '));
         });
         ui.show(player).then(
             async ({

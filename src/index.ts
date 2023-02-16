@@ -20,7 +20,7 @@ world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
                 // 打开菜单面板
                 new Menu<Player>(source as Player);
                 world.playSound('note.banjo', {
-                    location: source.getHeadLocation(),
+                    location: source.headLocation,
                     pitch: 1,
                     volume: 1,
                 });
@@ -31,8 +31,8 @@ world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
 // 创建自定义命令类
 const commandRegister: CommandRegister = new CommandRegister('#');
 // 获取版本
-commandRegister.addCommandListener('version', ({ sender }): void => {
-    world.broadcastClientMessage(sender.id, 'Version: 1.3.0');
+commandRegister.addCommandListener('version', (): void => {
+    world.say('Version: 1.3.0');
 });
 // 将聊天数据流发送到自定义命令管道里
 world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>
@@ -41,7 +41,7 @@ world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>
 // 玩家进入世界提示
 world.events.playerJoin.subscribe(({ playerId }: PlayerJoinEvent): void => {
     for (let player of world.getAllPlayers()) {
-        if (player.id === playerId) {
+        if (playerId === player.id) {
             player.onScreenDisplay.updateSubtitle(
                 '§aThe world has §cMST §aservices enabled'
             );
