@@ -2,18 +2,18 @@
     "format_version": 2,
     "header": {
         "name": "MineCraft Server Teleport",
-        "description": "Minecraft Server Teleport Tools (By lZiMUl)",
+        "description": "Minecraft Server Teleport (By lZiMUl)",
         "uuid": "cd9d9466-926d-4d95-8e85-d2f914bf95bc",
-        "version": [1, 3, 0],
-        "min_engine_version": [1, 19, 51]
+        "version": [1, 4, 1],
+        "min_engine_version": [1, 19, 60]
     },
     "modules": [
         {
             "type": "script",
             "language": "javascript",
-            "description": "Minecraft Server Teleport Tools (By lZiMUl)",
+            "description": "Minecraft Server Teleport (By lZiMUl)",
             "uuid": "df4b139a-cd89-43c1-a2d8-500f2a13edb8",
-            "version": [1, 3, 0],
+            "version": [1, 4, 1],
             "entry": "scripts/index.js"
         }
     ],

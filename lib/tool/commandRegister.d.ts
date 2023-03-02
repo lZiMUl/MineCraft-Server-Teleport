@@ -19,4 +19,4 @@ declare class CommandRegister {
 }
 export default CommandRegister;
 export type { Data, CallBack, Cache };
-//# sourceMappingURL=command_register.d.ts.map
+//# sourceMappingURL=commandRegister.d.ts.map

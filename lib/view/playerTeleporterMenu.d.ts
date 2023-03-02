@@ -5,4 +5,4 @@ declare class PlayerTeleporterMenu<T extends Player> {
     private tipsUI;
 }
 export default PlayerTeleporterMenu;
-//# sourceMappingURL=player_teleporter_menu.d.ts.map
+//# sourceMappingURL=playerTeleporterMenu.d.ts.map

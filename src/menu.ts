@@ -2,16 +2,16 @@
 import { Player } from '@minecraft/server';
 import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui';
 // 导入所需要的界面模块
-import PlayerTeleporterMenu from './view/player_teleporter_menu';
-import LocationTeleporterMenu from './view/location_teleporter_menu';
-import CoordinateTeleporterMenu from './view/coordinate_teleporter_menu';
+import PlayerTeleporterMenu from './view/playerTeleporterMenu';
+import LocationTeleporterMenu from './view/locationTeleporterMenu';
+import CoordinateTeleporterMenu from './view/coordinateTeleporterMenu';
 // 定义菜单类
 class Menu<T extends Player> {
     public constructor(player: T) {
         // 创建选择器界面
         new ActionFormData()
             .title('Actions menu')
-            .body('Please select an action (v1.3.0 by lZiMUl)')
+            .body('Please select an action (v1.4.1 by lZiMUl)')
             .button('Player Teleporter')
             .button('Location Teleporter')
             .button('Coordinate Teleporter')

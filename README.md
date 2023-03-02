@@ -10,7 +10,7 @@
 ---
 
 * 下载行为包
-    ``wget https://github.com/lZiMUl/MineCraft-Server-Teleport/releases/download/1.3.0/MineCraft.Server.Teleport.mcpack``
+    ``wget https://github.com/lZiMUl/MineCraft-Server-Teleport/releases/download/1.4.1/MineCraft.Server.Teleport.mcpack``
 
 ---
 
@@ -30,7 +30,7 @@
 ---
 
 * 写入该包设定到世界加载项
-  ``echo "[{\"pack_id\": \"cd9d9466-926d-4d95-8e85-d2f914bf95bc\",\"version\": [ 1, 3, 0 ]}]
+  ``echo "[{\"pack_id\": \"cd9d9466-926d-4d95-8e85-d2f914bf95bc\",\"version\": [ 1, 4, 1 ]}]
 " >  world_behavior_packs.json``
 
 ---

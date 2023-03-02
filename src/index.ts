@@ -7,7 +7,7 @@ import {
     PlayerJoinEvent,
 } from '@minecraft/server';
 import Menu from './menu';
-import CommandRegister from './tool/command_register';
+import CommandRegister from './tool/commandRegister';
 // 监听物品使用事件
 world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
     // 判断是否为潜伏状态
@@ -32,7 +32,7 @@ world.events.itemUse.subscribe(({ item, source }: ItemUseEvent): void => {
 const commandRegister: CommandRegister = new CommandRegister('#');
 // 获取版本
 commandRegister.addCommandListener('version', (): void => {
-    world.say('Version: 1.3.0');
+    world.say('Version: 1.4.1');
 });
 // 将聊天数据流发送到自定义命令管道里
 world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>
@@ -42,10 +42,10 @@ world.events.chat.subscribe(({ message, sender }: ChatEvent): void =>
 world.events.playerJoin.subscribe(({ playerId }: PlayerJoinEvent): void => {
     for (let player of world.getAllPlayers()) {
         if (playerId === player.id) {
+            player.onScreenDisplay.setTitle('§eTips');
             player.onScreenDisplay.updateSubtitle(
                 '§aThe world has §cMST §aservices enabled'
             );
-            player.onScreenDisplay.setTitle('§eTips');
             break;
         }
     }

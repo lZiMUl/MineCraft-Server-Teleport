@@ -7,4 +7,4 @@ declare class CoordinateTeleporterMenu<T extends Player> {
     private check;
 }
 export default CoordinateTeleporterMenu;
-//# sourceMappingURL=coordinate_teleporter_menu.d.ts.map
+//# sourceMappingURL=coordinateTeleporterMenu.d.ts.map

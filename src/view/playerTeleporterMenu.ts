@@ -27,22 +27,22 @@ class PlayerTeleporterMenu<T extends Player> {
                     // 获取玩家选择的目标玩家
                     const targetPlayer: T = this.players[selection as number];
                     // 获取目标玩家的位置和维度
-                    const { location, dimension }: Player = targetPlayer;
+                    const { location, dimension }: T = targetPlayer;
                     // 获取目标玩家的视角坐标系
                     const { x: rx, y: ry }: XYRotation = targetPlayer.rotation;
                     // 将操作玩家传送至目标玩家
                     player.teleport(location, dimension, rx, ry, false);
                     // 调用显示提示
-                    this.tipsUI(targetPlayer, player);
+                    this.tipsUI(player, targetPlayer);
                 }
             }
         );
     }
     // 提示方法
-    private tipsUI(targetPlayer: T, source: T): void {
+    private tipsUI(sourcePlayer: T, targetPlayer: T): void {
         // 创建并显示主标题
         targetPlayer.onScreenDisplay.setActionBar(
-            `§aPlayer §e[§c${source.name}§e] §ahas teleported to you`
+            `§aPlayer §e[§c${sourcePlayer.name}§e] §ahas teleported to you`
         );
     }
 }
